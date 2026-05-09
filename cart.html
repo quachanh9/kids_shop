@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <title>Giỏ hàng</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <header>
+            <h2>Bemohome</h2>
+            <nav>
+                <a href="index.html">Trang chủ</a>
+                <a href="product.html">Sản phẩm</a>
+                <a href="cart.html">Giỏ hàng</a>
+                <a href="contact.html">Liên hệ</a>
+            </nav>
+
+            <div class="search-box">
+                <input type="text" placeholder="Tìm sản phẩm...">
+            </div>
+
+            <div class="user-box">
+                <span id="welcomeUser">Xin chào</span>
+                <button class="logout-btn">Đăng xuất</button>
+            </div>
+        </header>
+
+        <div class="container">
+            <h1>Giỏ hàng của bạn</h1>
+
+            <div id="cart-container"></div>
+
+            <h2 id="total">Tổng: 0đ</h2>
+
+
+            <button onclick="goCheckout()">Đặt hàng</button>
+
+            <button class="clear-btn" onclick="clearCart()">Xóa toàn bộ giỏ hàng</button>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>

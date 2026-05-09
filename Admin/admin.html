@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Admin Panel</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="sidebar-top">
+        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+        <h2>🛍 Admin</h2>
+    </div>
+    <ul>
+        <li onclick="showPage('dashboard')">
+            📊 <span>Dashboard</span>
+        </li>
+        <li onclick="showPage('products')">
+             👕 <span>Sản phẩm</span>
+        </li>
+        <li onclick="showPage('orders')">
+            📦 <span>Quản lý đơn hàng</span> 
+        </li>
+    </ul>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1 id="page-title">Dashboard</h1>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="page">
+        <div class="cards">
+            <div class="card">
+                <h3>Doanh thu</h3>
+                <p id="revenue">0đ</p>
+            </div>
+
+            <div class="card">
+                <h3>Đơn hàng</h3>
+                <p id="orders">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Sản phẩm</h3>
+                <p id="products">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Khách hàng</h3>
+                <p id="users">0</p>
+            </div>
+        </div>
+
+        <h2 class="pro-title">Biểu đồ thống kê</h2>
+        <canvas id="chartPro"></canvas>
+
+        <div class="pro-container">
+            <div class="pro-box">
+                <h3>Top sản phẩm</h3>
+                <ul id="topPro"></ul>
+            </div>
+            <div class="pro-box">
+                <h3>Đơn hàng gần đây</h3>
+                <ul id="orderPro"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div id="products-page" class="page" style="display:none">
+
+        <div class="container">
+            <!-- FORM -->
+            <div class="form">
+                <h2>Thêm sản phẩm</h2>
+
+                <form id="productForm" enctype="multipart/form-data">
+                    <input type="text" id="name" placeholder="Tên sản phẩm" required>
+                    <input type="number" id="price" placeholder="Giá" required>
+                    <input type="number" id="stock" placeholder="Số lượng" required>
+                    <textarea id="description" placeholder="Mô tả"></textarea>
+                    <input type="file" id="image" required>
+                    <button type="submit">Lưu</button>
+                </form>
+            </div>
+
+            <!-- LIST -->
+            <div class="list">
+                <h2>Danh sách sản phẩm</h2>
+                <div id="product-list"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="orders-page" class="page" style="display: none">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Khách hàng</th>
+                    <th>SĐT</th>
+                    <th>Tổng tiền</th>
+                    <th>Ngày</th>
+                    <th>Trạng thái</th>
+                    <th>Hàng động</th>
+                </tr>
+            </thead>
+            <tbody id="order-list"></tbody>
+        </table>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="admin.js"></script>
+<script src="admin-pro.js"></script>
+</body>
+</html>

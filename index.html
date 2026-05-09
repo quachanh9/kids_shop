@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width = device-width, initial-scale=1.0">
+        <title>
+            Shop Quan Ao Tre Em
+        </title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <header>
+            <h2>Bemohome</h2>
+            <nav>
+                <a href="#">Trang chủ</a>
+                <a href="product.html">Sản phẩm</a>
+                <a href="cart.html">Giỏ hàng</a>
+                <a href="contact.html">Liên hệ</a>
+            </nav>
+
+            <!--SEARCH-->
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="searchHeader" 
+                    placeholder="Tìm sản phẩm..." 
+                    onkeyup="searchSuggest(event)"
+                    onkeypress="handleSearch(event)"
+                >
+                <div id="suggestBox"></div>
+            </div>
+            <div class="user-box">
+                <span id="userName"></span>
+                <button id="logoutBtn">Đăng xuất</button>
+            </div>
+        </header>
+        <section class="about-slider">
+            <div class="slide active">
+                <img src="images/slide1.jfif">
+                <div class="slide-content">
+                    <span>THỜI TRANG TRẺ EM</span>
+                    <h1>
+                        Con trẻ tuyệt nhất <br> khi thoải mái là chính mình
+                    </h1>
+                    <p>
+                        Mang đến những bộ quần áo mềm mại, dễ thương và an toàn cho bé yêu.
+                    </p>
+                    <a href="product.html">Mua ngay</a>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="images/slide2.jfif">
+                <div class="slide-content">
+                    <span>CHẤT LIỆU CAO CẤP</span>
+                    <h1>
+                        Mềm mại <br> và thoáng mát mỗi ngày
+                    </h1>
+                    <p>
+                        Chất liệu cotton cao cấp giúp bé luôn dễ chịu khi vui chơi.
+                    </p>
+                    <a href="product.html">Khám phá</a>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="images/slide3.jfif">
+                <div class="slide-content">
+                    <span>PHONG CÁCH HIỆN ĐẠI</span>
+                    <h1>
+                        Dễ thương <br> nhưng vẫn rất năng động
+                    </h1>
+                    <p>
+                        Thiết kế hiện đại phù hợp cho cả đi học và đi chơi.
+                    </p>
+                    <a href="product.html">Xem thêm</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="product-section">
+            <h2 class="section-title">SẢN PHẨM NỔI BẬT</h2>
+
+            <div class="product-tabs">
+                <button class="tab-btn active" onclick="loadHomeProducts('random')">Hot sales</button>
+                <button class="tab-btn" onclick="loadHomeProducts('new')">Hàng mới</button>
+            </div>
+
+            <div id="home-products" class="product-list"></div>
+        </section>
+        
+        <footer class="main-footer">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>GIỚI THIỆU</h3>
+                    <a href="#">Giới thiệu</a>
+                    <a href="#">Chính sách đổi trả</a>
+                    <a href="#">Chính sách bảo mật</a>
+                    <a href="#">Chính sách vận chuyển</a>
+                    <a href="#">Điều khoản dịch vụ</a>
+                    <a href="#">Hướng dẫn mua hàng</a>
+                    <a href="#">Hướng dẫn thanh toán</a>
+                    <a href="#">Liên hệ</a>
+                </div>
+
+                <div class="footer-col">
+                    <h3>THÔNG TIN CÔNG TY</h3>
+                    <p><strong>Bemohome Việt Nam</strong></p>
+                    <p>Mã số thuế: 0107126252</p>
+                    <p>Địa chỉ: Hà Nội, Việt Nam</p>
+                    <p>Hotline: 0962 999 999</p>
+                    <p>Email: bemohome2706@gmail.com</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3>HỆ THỐNG CỬA HÀNG</h3>
+                    <p>Hà Nội: 123 Cầu Giấy</p>
+                    <p>Hotline: 0988 888 888</p>
+                    <p>Hồ Chí Minh: 456 Võ Chí Công, Quận 1</p>
+                    <p>Hotline: 0977 777 777</p>
+                    <p>Thời gian mở cửa: 9h00 - 22h00</p>
+                </div>
+
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/profile.php?id=100094144066137" target="_blank" class="social-item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
+                        <div>
+                            <h4>Facebook</h4>
+                            <span>Bemohome Official</span>
+                        </div> 
+                    </a>
+
+                    <a href="https://www.tiktok.com/@bemohome" target="_blank" class="social-item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png">
+                        <div>
+                            <h4>Tiktok</h4>
+                            <span>@bemohome</span>
+                        </div>
+                    </a>
+
+                    <a href="https://shopee.vn/bemo.home?entryPoint=ShopBySearch&searchKeyword=bemohome" target="_blank" class="social-item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968919.png">
+                        <div>
+                            <h4>Shopee</h4>
+                            <span>Bemohome Mall</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                © 2026 Bemohome - Shop Quần Áo Trẻ Em
+            </div>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>

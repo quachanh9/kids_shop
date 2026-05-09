@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết sản phẩm</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h2>Bemohome</h2>
+        <nav>
+            <a href="index.html">Trang chủ</a>
+            <a href="product.html">Sản phẩm</a>
+            <a href="cart.html">Giỏ hàng</a>
+            <a href="contact.html">Liên hệ</a>
+        </nav>
+
+        <div class="search-box">
+            <input type="text" placeholder="Tìm kiếm sản phẩm...">
+        </div>
+
+        <div class="user-box">
+            <span id="welcomeUser">Xin chào</span>
+            <button class="logout-btn">Đăng xuất</button>
+        </div>
+    </header>
+
+    <div class="detail-container">
+        <div class="detail-img">
+            <img id="productImage">
+        </div>
+
+        <div class="detail-info">
+            <h2 id="productName"></h2>
+            <p class="price" id="productPrice"></p>
+            <p id="productStock"></p>
+            <p id="productDesc">
+                <strong>Mô tả sản phẩm: </strong>
+            </p>
+
+            <!-- SỐ LƯỢNG -->
+            <div class="quantity-wrapper">
+                <label>Số lượng:</label>
+                <button onclick="changeQty(-1)">-</button>
+                <input type="number" id="qty" value="1" min="1">
+                <button onclick="changeQty(1)">+</button>
+             </div>
+
+            <div class="detail-actions">
+                <button class="detail-btn" onclick="addToCart()">Thêm vào giỏ hàng</button>
+                <button class="detail-btn" onclick="buyNow()">Mua ngay</button>
+            </div>
+
+        </div>
+    </div>
+
+     <!-- sẢN PHẨM LIÊN QUAN -->
+     <h2 style="margin-left: 40px;">Sản phẩm liên quan</h2>
+     <div id="related-products"></div>
+     <script src="script.js"></script>
+
+</body>
+</html>

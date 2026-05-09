@@ -1,0 +1,321 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    display: flex;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: linear-gradient(180deg, #2f3542, #1e272e);
+    color: white;
+    padding: 15px 10px;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+/* THU GỌN */
+.sidebar.hide {
+    width: 70px;
+}
+
+/* ===== TOP ===== */
+.sidebar-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+/* ICON ☰ */
+.toggle-btn {
+    background: #1e90ff;
+    border: none;
+    color: white;
+    font-size: 18px;
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.toggle-btn:hover {
+    background: #ff6b81;
+}
+
+/* TITLE */
+.sidebar-top h2 {
+    font-size: 18px;
+    margin: 0;
+    white-space: nowrap;
+}
+
+/* ẨN TEXT KHI THU */
+.sidebar.hide .sidebar-top h2 {
+    display: none;
+}
+
+/* ===== MENU ===== */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* HOVER */
+.sidebar li:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* ACTIVE */
+.sidebar li.active {
+    background: #1e90ff;
+}
+
+/* ICON khi thu nhỏ vẫn đẹp */
+.sidebar.hide li {
+    justify-content: center;
+    font-size: 18px;
+}
+
+/* ẨN TEXT menu khi thu */
+.sidebar.hide li span {
+    display: none;
+}
+
+/* MAIN */
+.main {
+    flex: 1;
+    background: #f1f2f6;
+}
+
+/* HEADER */
+.header {
+    background: white;
+    padding: 15px 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* DASHBOARD */
+.cards {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ff4757;
+}
+
+/* PRODUCT PAGE */
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.form, .list {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.form {
+    width: 30%;
+}
+
+.list {
+    width: 70%;
+}
+
+/* INPUT */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 10px;
+    background: #1e90ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* PRODUCT ITEM */
+.product {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.product img {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+}
+
+.product h3 {
+    width: 180px;
+}
+
+.product .price {
+    width: 120px;
+    color: #ff4757;
+    font-weight: bold;
+}
+
+.product .stock {
+    width: 100px;
+}
+
+.product .desc {
+    flex: 1;
+}
+
+.product button {
+    width: 80px;
+}
+
+/*Dashboard Pro*/
+.pro-title {
+    padding: 20px;
+    font-size: 20px;
+}
+
+#chartPro {
+    background: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.pro-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.pro-box {
+    flex: 1;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.pro-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.pro-box li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pro-box span {
+    color: #ff4757;
+    font-weight: bold;
+}
+
+/* ===== TABLE ===== */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table thead {
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+    color: white;
+}
+
+.table th {
+    padding: 12px;
+    text-align: left;
+}
+
+.table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.table tr:hover {
+    background: #f9f9f9;
+}
+
+.price {
+    color: red;
+    font-weight: bold;
+}
+
+/* ===== TITLE ===== */
+#orders-page h2 {
+    margin-bottom: 15px;
+}
+
+/* ===== PAGE CARD STYLE ===== */
+#orders-page {
+    padding: 20px;
+}
+
+.table button {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.table button:nth-child(1) {
+    background: #00b894;
+    color: white;
+}
+
+.table button:nth-child(2) {
+    background: #d63031;
+    color: white;
+}
+
+select {
+    padding: 5px;
+    border-radius: 5px;
+}

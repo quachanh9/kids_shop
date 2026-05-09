@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <title>Thanh toán</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <header>
+            <h2>Bemohome</h2>
+            <nav>
+                <a href="index.html">Trang chủ</a>
+                <a href="product.html">Sản phẩm</a>
+                <a href="cart.html">Giỏ hàng</a>
+                <a href="contact.html">Liên hệ</a>
+            </nav>
+
+            <div class="search-box">
+                <input type="text" placeholder="Tìm kiếm sản phẩm...">
+            </div>
+
+            <div class="user-box">
+                <span id="welcomeUser">Xin chào</span>
+                <button class="logout-btn">Đăng xuất</button>
+            </div>
+        </header>
+
+        <h1>Thanh toán</h1>
+
+        <div class="checkout-container">
+            <!-- Thông tin khách hàng -->
+            <div class="customer-info">
+                <h2>Thông tin khách hàng</h2>
+                <input type="text" id="name" placeholder="Họ và tên">
+                <input type="text" id="phone" placeholder="Số điện thoại">
+                <input type="text" id="address" placeholder="Địa chỉ">
+            </div>
+
+            <!-- Đơn hàng -->
+            <div class="order-summary">
+                <h2>Đơn hàng</h2>
+                <div id="order-items"></div>
+                <h3 id="total">Tổng: 0đ</h3>
+                <button onclick="placeOrder()">Đặt hàng</button>
+            </div> 
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
