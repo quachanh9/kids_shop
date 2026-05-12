@@ -288,6 +288,7 @@ async function placeOrder() {
 async function loadCheckout() {
     const user = JSON.parse(localStorage.getItem("currentUser"));
     if (!user) return;
+    document.getElementById("name").value = user.username;
 
     let res = await fetch(`http://localhost:3000/cart/${user.id}`);
     let cart = await res.json();
@@ -299,22 +300,127 @@ async function loadCheckout() {
 
     cart.forEach(item => {
         total += item.price * item.quantity;
+        let itemTotal = item.price * item.quantity;
+        
         container.innerHTML += `
-            <div class="cart-item">
+            <div class="checkout-item">
                 <img src="http://localhost:3000/uploads/${item.image}">
-                <div>
+                <div class="checkout-info">
                     <h3>${item.name}</h3>
+                    <p>Size: ${item.size}</p>
                     <p>Số lượng: ${item.quantity}</p>
+                    <p> Giá: ${Number(item.price).toLocaleString("vi-VN")}đ</p>
+                    <p class="checkout-total">Thành tiền: ${Number(itemTotal).toLocaleString("vi-VN")}đ</p>
                 </div>
             </div>
         `;
     });
 
-    document.getElementById("total").innerText = "Tổng: " + total.toLocaleString("vi-VN") + "đ";
+    let shipping = 30000;
+    let finalTotal = total + shipping;
+    document.getElementById("total").innerText = "Tổng: " + finalTotal.toLocaleString("vi-VN") + "đ";
 }
 
 if (document.getElementById("order-items")) {
     loadCheckout();
+}
+
+async function loadProvince() {
+
+    let res = await fetch("https://provinces.open-api.vn/api/p/");
+    let provinces = await res.json();
+
+    let province = document.getElementById("province");
+
+    provinces.forEach(p => {
+        province.innerHTML += `
+            <option value="${p.code}">
+                ${p.name}
+            </option>
+        `;
+    });
+}
+
+// LOAD QUẬN HUYỆN
+async function loadDistrict(provinceCode) {
+
+    let district = document.getElementById("district");
+
+    district.innerHTML =
+        `<option>Chọn quận / huyện</option>`;
+
+    let ward = document.getElementById("ward");
+
+    ward.innerHTML =
+        `<option>Chọn phường / xã</option>`;
+
+    let res = await fetch(
+        `https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`
+    );
+
+    let data = await res.json();
+
+    data.districts.forEach(d => {
+
+        district.innerHTML += `
+            <option value="${d.code}">
+                ${d.name}
+            </option>
+        `;
+    });
+}
+
+// LOAD PHƯỜNG XÃ
+async function loadWard(districtCode) {
+
+    let ward = document.getElementById("ward");
+
+    ward.innerHTML =
+        `<option>Chọn phường / xã</option>`;
+
+    let res = await fetch(
+        `https://provinces.open-api.vn/api/d/${districtCode}?depth=2`
+    );
+
+    let data = await res.json();
+
+    data.wards.forEach(w => {
+
+        ward.innerHTML += `
+            <option value="${w.code}">
+                ${w.name}
+            </option>
+        `;
+    });
+}
+
+// KHI CHỌN TỈNH
+if (document.getElementById("province")) {
+
+    loadProvince();
+
+    document
+        .getElementById("province")
+        .addEventListener("change", function () {
+
+            loadDistrict(this.value);
+        });
+}
+
+// KHI CHỌN QUẬN
+if (document.getElementById("district")) {
+
+    document
+        .getElementById("district")
+        .addEventListener("change", function () {
+
+            loadWard(this.value);
+        });
+}
+
+
+if(document.getElementById("province")) {
+    loadProvince();
 }
 
 // Tìm kiếm sản phẩm

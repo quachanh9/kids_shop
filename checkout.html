@@ -32,18 +32,55 @@
             <!-- Thông tin khách hàng -->
             <div class="customer-info">
                 <h2>Thông tin khách hàng</h2>
-                <input type="text" id="name" placeholder="Họ và tên">
+                <input type="text" id="name" placeholder="Họ và tên" readonly>
                 <input type="text" id="phone" placeholder="Số điện thoại">
-                <input type="text" id="address" placeholder="Địa chỉ">
-            </div>
+                <input type="text" id="address" placeholder="Địa chỉ cụ thể">
+                
+                <div class="address-select">
+                    <select id="province">
+                        <option>Chọn tỉnh / thành phố</option>
+                    </select>
 
+                    <select id="district">
+                        <option>Chọn quận / huyện</option>
+                    </select>
+
+                    <select id="ward">
+                        <option>Chọn phường / xã</option>
+                    </select>
+
+                    <div class="payment-method">
+                        <h3>Phương thức thanh toán</h3>
+                        <label class="payment-item">
+                            <input type="radio" name="payment" value="cod" checked>
+                            <img src="images/cod.png">
+                            <span>Thanh toán khi nhận hàng</span>
+                        </label>
+
+                        <label class="payment-item">
+                            <input type="radio" name="payment" value="bank">
+                            <img src="images/qr.jpg">
+                            <span>Chuyển khoản ngân hàng (QR Code)</span>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+    
             <!-- Đơn hàng -->
             <div class="order-summary">
                 <h2>Đơn hàng</h2>
                 <div id="order-items"></div>
-                <h3 id="total">Tổng: 0đ</h3>
+                <div class="voucher-box">
+                    <input type="text" id="voucher" placeholder="Nhập mã giảm giá">
+                </div>
+                <div class="checkout-price">
+                    <p>Phí vận chuyển: <span>30.000đ</span></p>
+                    <h3 id="total">Tổng: 0đ</h3>
+                </div>
                 <button onclick="placeOrder()">Đặt hàng</button>
             </div> 
+
         </div>
         <script src="script.js"></script>
     </body>
