@@ -108,6 +108,7 @@ async function addToCart() {
             : 1;
 
         let product_id = localStorage.getItem("detailId");
+        let size = localStorage.getItem("selectedSize") || "0-6M"; 
 
         let res = await fetch("http://localhost:3000/cart", {
             method: "POST",
@@ -117,7 +118,8 @@ async function addToCart() {
             body: JSON.stringify({
                 user_id: user.id,
                 product_id,
-                quantity
+                quantity, 
+                size
             })
         });
 
@@ -154,21 +156,50 @@ async function renderCart() {
     cart.forEach(item => {
         total += item.price * item.quantity;
 
+        let itemTotal = item.price * item.quantity;
         container.innerHTML += `
-            <div class="cart-item">
+           <div class="cart-item">
                 <img src="http://localhost:3000/uploads/${item.image}">
-                <div>
+                <div class="cart-info">
                     <h3>${item.name}</h3>
-                    <p>Số lượng: ${item.quantity}</p>
+                    <p>Size: ${item.size}</p>
+                    <p>
+                        Giá: ${Number(item.price).toLocaleString("vi-VN")}đ
+                    </p>
+                    <div class="cart-qty">
+                        <button onclick="changeCartQty(${item.id}, ${item.quantity - 1})"> - </button>
+                        <span>${item.quantity}</span>
+                        <button onclick="changeCartQty(${item.id}, ${item.quantity + 1})"> + </button>
+                    </div>
+
+                    <p class="item-total"> Thành tiền: ${Number(itemTotal).toLocaleString("vi-VN")}đ</p>
+
                 </div>
-                <button onclick="removeItem(${item.id})">Xóa</button>
-            </div>
+
+                <button class="remove-btn" onclick="removeItem(${item.id})">Xóa</button>
+
+           </div> 
         `;
     });
     document.getElementById("total").innerText = "Tổng: " + total.toLocaleString("vi-VN") + "đ";
 }
 
+async function changeCartQty(id, quantity) {
+    if (quantity < 1) return;
+
+    await fetch(`http://localhost:3000/cart/${id}`,{
+        method: "PUT",
+        headers: { "Content-Type":"application/json" },
+        body: JSON.stringify({ quantity })
+    });
+
+    renderCart();
+}
+
 async function removeItem(id) {
+    let check = confirm("Bạn có muốn xóa sản phẩm này không?");
+
+    if(!check) return;
     await fetch(`http://localhost:3000/cart/${id}`, {
         method: "DELETE"
     });
@@ -191,7 +222,7 @@ async function clearCart() {
   renderCart();
 }
 
-function goCheckout() {
+function checkout() {
     window.location.href = "checkout.html"
 }
 
@@ -343,7 +374,10 @@ async function loadDetail() {
     document.getElementById("productPrice").innerText = Number(p.price).toLocaleString('vi-VN') + "đ";
     document.getElementById("productImage").src = "http://localhost:3000/uploads/" + p.image;
     document.getElementById("productStock").innerHTML = "<strong>Tồn kho: </strong>" + p.stock;
-    document.getElementById("productDesc").innerHTML = "<strong>Mô tả sản phẩm: </strong>" + (p.description) || "Không có mô tả;"
+    if (document.getElementById("bottomDescription")) {
+        document.getElementById("bottomDescription").innerText = p.description || "Chưa có mô tả sản phẩm";
+    }
+
     //dùng cho giỏ hàng
     localStorage.setItem("name", p.name);
     localStorage.setItem("price", p.price);
@@ -369,6 +403,15 @@ async function loadDetail() {
 
         relatedBox.innerHTML = html;
     }
+}
+
+function selectSize(btn) {
+    document.querySelectorAll(".size-btn").forEach(item => {
+        item.classList.remove("active");
+    });
+
+    btn.classList.add("active");
+    localStorage.setItem("selectedSize", btn.innerText);
 }
 
 if (document.getElementById("productName")) {

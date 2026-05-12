@@ -34,9 +34,18 @@
             <h2 id="productName"></h2>
             <p class="price" id="productPrice"></p>
             <p id="productStock"></p>
-            <p id="productDesc">
-                <strong>Mô tả sản phẩm: </strong>
-            </p>
+            
+            <!-- SIZE -->
+             <div class="size-wrapper">
+                <label>Chọn size:</label>
+
+                <div class="size-list">
+                    <button class="size-btn active" onclick="selectSize(this)">0-6M</button>
+                    <button class="size-btn" onclick="selectSize(this)">6-12M</button>
+                    <button class="size-btn" onclick="selectSize(this)">12-18M</button>
+                    <button class="size-btn" onclick="selectSize(this)">18-24M</button>
+                </div>
+             </div>
 
             <!-- SỐ LƯỢNG -->
             <div class="quantity-wrapper">
@@ -54,7 +63,13 @@
         </div>
     </div>
 
-     <!-- sẢN PHẨM LIÊN QUAN -->
+    <!-- MÔ TẢ SẢN PHẨM -->
+    <div class="product-description">
+        <h2>Mô tả sản phẩm</h2>
+        <p id="bottomDescription"></p>
+    </div>
+
+     <!-- SẢN PHẨM LIÊN QUAN -->
      <h2 style="margin-left: 40px;">Sản phẩm liên quan</h2>
      <div id="related-products"></div>
      <script src="script.js"></script>

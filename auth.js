@@ -1,17 +1,19 @@
 const API = "http://localhost:3000/api/auth";
 
-// ===== LẤY DOM =====
+// ===== DOM =====
 const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
 
 const showRegister = document.getElementById("showRegister");
 const showLogin = document.getElementById("showLogin");
 
-const loginUsername = document.getElementById("loginUsername");
+const loginEmail = document.getElementById("loginEmail");
 const loginPassword = document.getElementById("loginPassword");
 
 const registerUsername = document.getElementById("registerUsername");
+const registerEmail = document.getElementById("registerEmail");
 const registerPassword = document.getElementById("registerPassword");
+const confirmPassword = document.getElementById("confirmPassword");
 
 
 // ===== CHUYỂN FORM =====
@@ -31,13 +33,21 @@ registerForm.onsubmit = async (e) => {
     e.preventDefault();
 
     let username = registerUsername.value;
+    let email = registerEmail.value;
     let password = registerPassword.value;
+    let confirmPw = confirmPassword.value;
+
+    // check confirm password
+    if (password !== confirmPw) {
+        alert("Mật khẩu xác nhận không khớp");
+        return;
+    }
 
     try {
         let res = await fetch(API + "/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ username, email, password })
         });
 
         let data = await res.json();
@@ -62,14 +72,14 @@ registerForm.onsubmit = async (e) => {
 loginForm.onsubmit = async (e) => {
     e.preventDefault();
 
-    let username = loginUsername.value;
+    let email = loginEmail.value;
     let password = loginPassword.value;
 
     try {
         let res = await fetch(API + "/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ email, password })
         });
 
         let data = await res.json();
@@ -79,7 +89,6 @@ loginForm.onsubmit = async (e) => {
 
             alert("Đăng nhập thành công");
 
-            // 🔥 CHUYỂN TRANG
             window.location.href = "index.html";
         } else {
             alert(data.message);
