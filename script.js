@@ -49,6 +49,8 @@ async function loadProducts() {
     let res = await fetch(API + "/products");
     let products = await res.json();    
     allProducts = products;
+    renderProducts(products);
+    setupFilter();
 
 // 🔥 THÊM ĐOẠN NÀY (SEARCH ENTER)
 let keyword = localStorage.getItem("searchKeyword");
@@ -58,33 +60,83 @@ if (keyword) {
         p.name.toLowerCase().includes(keyword.toLowerCase())
     );
 
-    // 🔥 xoá sau khi dùng
+    // xoá sau khi dùng
     localStorage.removeItem("searchKeyword");
 }
-
-    // ===== TRANG PRODUCT (HIỆN FULL) =====
-    let container = document.getElementById("product-container");
-    if (container) {
-        container.innerHTML = "";
-
-        products.forEach(p => {
-            container.innerHTML += `
-                <div class="product">
-                    <img src="http://localhost:3000/uploads/${p.image}">
-                    <h3>${p.name}</h3>
-                    <p class="price">${Number(p.price).toLocaleString('vi-VN')}đ</p>
-                    <button onclick="goDetail(${p.id})">Xem chi tiết</button>
-                </div>
-            `;
-        });
-    }
-
+    
     // === HOME PRODUCT ===
     window.allHomeProducts = products;
     loadHomeProducts("random");
 }
 
 loadProducts();
+
+// === RENDER PRODUCTS ===
+function renderProducts(products) {
+    let container = document.getElementById("product-container");
+    if (!container) return;
+    container.innerHTML = "";
+    if (products.length === 0) {
+        container.innerHTML = `
+            <div class="empty-product">Không tìm thấy sản phẩm</div>
+        `;
+        return;
+    }
+
+    products.forEach(p => {
+        container.innerHTML += `
+            <div class="product">
+                <div class="product-image">
+                    <img src="http://localhost:3000/uploads/${p.image}">
+                </div>
+
+                <div class="product-content">
+                    <div class="product-category">${p.category || "Sản phẩm"}</div>
+                    <h3>${p.name}</h3>
+                    <p class="price">${Number(p.price).toLocaleString("vi-VN")}đ</p>
+                    <button onclick="goDetail(${p.id})">Xem chi tiết</button>
+                </div>
+            </div>
+        `;
+    });
+}
+
+// === FILTER ===
+function setupFilter() {
+    const category = document.getElementById("filterCategory");
+    const size = document.getElementById("filterSize");
+    const sort = document.getElementById("sortPrice");
+
+    if (!category || !size || !sort) return;
+
+    function applyFilter() {
+        let filtered = [...allProducts];
+        //CATEGORY
+        if (category.value) {
+            filtered = filtered.filter(p => {
+                p.category && p.category.toLowerCase() === category.value.toLowerCase()
+            });
+        }
+
+        //SIZE
+        if (size.value) {
+            filtered = filtered.filter(p => {
+                p.sizes && p.sizes.includes(size.value)
+            });
+        }
+
+        //SORT PRICE
+        if (sort.value === "low") {
+            filtered.sort((a, b) => b.price - a.price);
+        }
+
+        renderProducts(filtered);
+    }
+
+    category.addEventListener("change", applyFilter);
+    size.addEventListener("change", applyFilter);
+    sort.addEventListener("change", applyFilter);
+}
 
 // === DETAIL ===
 function goDetail(id) {
@@ -255,7 +307,8 @@ async function placeOrder() {
     const fixedCart = cart.map(item => ({
         product_id: item.product_id,
         quantity: item.quantity,
-        price: item.price
+        price: item.price,
+        size: item.size
     }));
 
     //Gửi đơn
@@ -606,5 +659,105 @@ function loadHomeProducts(type = "random") {
         `;
     });
 }
+
+//=== HISTORY ===
+async function loadHistory() {
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+    if (!user) {
+        window.location.href = "auth.html";
+        return;
+    }
+
+    let res = await fetch(`http://localhost:3000/api/orders/user/${user.id}`);
+    let orders = await res.json();
+    let container = document.getElementById("history-container");
     
+    if (!container) return;
+    
+    if (orders.length === 0) {
+        container.innerHTML =`
+            <div class="empty-history">Bạn chưa có đơn hàng nào</div>
+        `;
+        return;
+    }
+
+    container.innerHTML = "";
+    orders.forEach(item => {
+        let total = item.price * item.quantity;
+        container.innerHTML = "";
+
+    orders.forEach(item => {
+
+        let total = item.price * item.quantity;
+
+        let statusText = "Đang xử lý";
+        let statusClass = "pending";
+
+        if(item.status === "confirmed") {
+            statusText = "Đã xác nhận";
+            statusClass = "confirmed";
+        }        
+
+        if(item.status === "shipping") {
+            statusText = "Đang giao";
+            statusClass = "shipping";
+        }
+
+        if(item.status === "done") {
+            statusText = "Đã giao";
+            statusClass = "done";
+        }
+
+        if(item.status === "cancel") {
+            statusText = "Đã hủy";
+            statusClass = "cancel";
+        }
+
+    container.innerHTML += `
+        <div class="history-card">
+
+            <div class="history-left">
+                <img src="http://localhost:3000/uploads/${item.image}">
+            </div>
+
+            <div class="history-info">
+
+                <div class="history-top">
+                    <h3>${item.name}</h3>
+
+                    <div class="history-status ${statusClass}">
+                        ${statusText}
+                    </div>
+                </div>
+
+                <div class="history-meta">
+                    <p>📦 Số lượng: ${item.quantity}</p>
+                    <p>💰 Giá: ${Number(item.price).toLocaleString("vi-VN")}đ</p>
+                    <p>📍 ${item.address}</p>
+                    <p>📞 ${item.phone}</p>
+                </div>
+
+                <div class="history-bottom">
+
+                    <div class="history-date">
+                        ${new Date(item.created_at).toLocaleString("vi-VN")}
+                    </div>
+
+                    <div class="history-total">
+                        ${Number(total).toLocaleString("vi-VN")}đ
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+    });
+    });
+}
+
+if (document.getElementById("history-container")) {
+    loadHistory();
+}
 

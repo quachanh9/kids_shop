@@ -11,7 +11,8 @@
             <nav>
                 <a href="index.html">Trang chủ</a>
                 <a href="product.html">Sản phẩm</a>
-                <a href="cart.html">Giỏ hàng</a>
+                <a href="cart.html" class="nav-icon">🛒</a>
+                <a href="history.html" class="nav-icon">📦</a>
                 <a href="#">Liên hệ</a>
             </nav>
 
@@ -32,7 +33,40 @@
             </div>
         </header>
 
-        <h1>Danh sách sản phẩm</h1>
+        <h1 class="product-page-title">Danh sách sản phẩm</h1>
+
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label>Danh mục</label>
+                <select id="filterCategory">
+                    <option value="">Tất cả</option>
+                    <option value="áo">Áo</option>
+                    <option value="body">Body</option>
+                    <option value="bộ">Bộ</option>
+                    <option value="phụ kiện">Phụ kiện</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Kích thước</label>
+                <select id="filterSize">
+                    <option value="">Tất cả</option>
+                    <option value="0-6M">0-6M</option>
+                    <option value="6-12M">6-12M</option>
+                    <option value="12-18M">12-18M</option>
+                    <option value="18-24M">18-24M</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Sắp xếp</label>
+                <select id="sortPrice">
+                    <option value="">Mặc định</option>
+                    <option value="low">Giá thấp -> cao</option>
+                    <option value="high">Giá cao -> thấp</option>
+                </select>
+            </div>
+        </div>
 
         <div id="product-container"></div>
 

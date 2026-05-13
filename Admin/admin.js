@@ -218,8 +218,27 @@ async function loadOrders() {
 
                     <td>
                         <select onchange="updateStatus(${o.id}, this.value)">
-                            <option value="pending" ${o.status === "pending" ? "selected" : ""}>Chờ xử lý</option>
-                            <option value="done" ${o.status === "done" ? "selected" : ""}>Hoàn thành</option>
+
+                            <option value="pending"
+                                ${o.status === "pending" ? "selected" : ""}>Chờ xác nhận
+                            </option>
+
+                            <option value="confirmed"
+                                ${o.status === "confirmed" ? "selected" : ""}>Đã xác nhận
+                            </option>
+
+                            <option value="shipping"
+                                ${o.status === "shipping" ? "selected" : ""}>Đang giao
+                            </option>
+
+                            <option value="done"
+                                ${o.status === "done" ? "selected" : ""}>Đã giao
+                            </option>
+
+                            <option value="cancel"
+                                ${o.status === "cancel" ? "selected" : ""}>Đã hủy
+                            </option>
+
                         </select>
                     </td>
 

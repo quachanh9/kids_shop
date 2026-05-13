@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lịch sử mua hàng</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <header>
+            <h2>Bemohome</h2>
+            <nav>
+                <a href="index.html">Trang chủ</a>
+                <a href="product.html">Sản phẩm</a>
+                <a href="cart.html" class="nav-icon">🛒</a>
+                <a href="history.html" class="nav-icon">📦</a>
+                <a href="contact.html">Liên hệ</a>
+            </nav>
+
+            <!--SEARCH-->
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="searchHeader" 
+                    placeholder="Tìm sản phẩm..." 
+                    onkeyup="searchSuggest(event)"
+                    onkeypress="handleSearch(event)"
+                >
+                <div id="suggestBox"></div>
+            </div>
+            <div class="user-box">
+                <span id="userName"></span>
+                <button id="logoutBtn">Đăng xuất</button>
+            </div>
+        </header>
+        
+        <h1 class="history-title">Lịch sử mua hàng</h1>
+        <div id="history-container" class="history-container"></div>
+        <script src="script.js"></script>
+
+    </body>
+</html>
