@@ -319,3 +319,140 @@ select {
     padding: 5px;
     border-radius: 5px;
 }
+
+.admin-card {
+    background: white;
+    margin: 20px;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.admin-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.admin-add {
+    display: flex;
+    gap: 10px;
+}
+
+.admin-add input {
+    width: 250px;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+}
+
+.admin-add button {
+    width: 120px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #1e90ff, #3742fa);
+}
+
+.category-item, .size-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 14px;
+    margin-bottom: 12px;
+}
+
+.category-item h3, .size-item h3 {
+    margin: 0;
+}
+
+.action-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btns button {
+    width: 90px;
+    border-radius: 10px;
+}
+
+.delete-btn {
+    background: #ff4757 !important;
+}
+
+.delete-btn:hover {
+    background: #ff3742 !important;
+} 
+
+.role {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.role.admin {
+    background: #ff4d4f;
+    color: white;
+}
+
+.role.user {
+    background: #52c41a;
+    color: white;
+}
+
+.order-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.order-modal-box {
+    width: 700;
+    max-height: 80vh;
+    overflow-y: auto;
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+}
+
+.order-modal-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.order-modal-top button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: #ff4757;
+    color: white;
+    cursor: pointer;
+}
+
+.order-item {
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.order-item h3 {
+    margin-top: 0;
+}
+
+.order-total {
+    font-size: 22px;
+    font-weight: bold;
+    color: red;
+    text-align: right;
+    margin-top: 20px;
+}

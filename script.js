@@ -49,8 +49,6 @@ async function loadProducts() {
     let res = await fetch(API + "/products");
     let products = await res.json();    
     allProducts = products;
-    renderProducts(products);
-    setupFilter();
 
 // 🔥 THÊM ĐOẠN NÀY (SEARCH ENTER)
 let keyword = localStorage.getItem("searchKeyword");
@@ -63,6 +61,9 @@ if (keyword) {
     // xoá sau khi dùng
     localStorage.removeItem("searchKeyword");
 }
+
+renderProducts(products);
+setupFilter();
     
     // === HOME PRODUCT ===
     window.allHomeProducts = products;
@@ -114,20 +115,30 @@ function setupFilter() {
         //CATEGORY
         if (category.value) {
             filtered = filtered.filter(p => {
-                p.category && p.category.toLowerCase() === category.value.toLowerCase()
+                return (p.category && p.category.toLowerCase().trim() === category.value.toLowerCase().trim());
             });
         }
 
-        //SIZE
+        // SIZE
         if (size.value) {
+
             filtered = filtered.filter(p => {
-                p.sizes && p.sizes.includes(size.value)
+
+        if (!p.sizes) return false;
+
+            let sizeList = p.sizes
+                .split(",")
+                .map(s => s.trim());
+
+            return sizeList.includes(size.value);
             });
         }
 
         //SORT PRICE
         if (sort.value === "low") {
-            filtered.sort((a, b) => b.price - a.price);
+            filtered.sort((a, b) => a.price - b.price);
+        } else if (sort.value === "high") {
+            filtered.sort((a,b) => b.price - a.price);
         }
 
         renderProducts(filtered);
@@ -760,4 +771,3 @@ async function loadHistory() {
 if (document.getElementById("history-container")) {
     loadHistory();
 }
-

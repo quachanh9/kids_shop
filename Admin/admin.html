@@ -19,10 +19,23 @@
             📊 <span>Dashboard</span>
         </li>
         <li onclick="showPage('products')">
-             👕 <span>Sản phẩm</span>
+             👕 <span>Quản lý sản phẩm</span>
+        </li>
+        <li onclick="showPage('categories')">
+            📂 <span>Danh mục sản phẩm</span>
+        </li>
+        <li onclick="showPage('sizes')">
+            📏 <span>Quản lý size</span>
+        </li>
+        <li onclick="showPage('users')">
+            👤 <span>Quản lý tài khoản</span>
         </li>
         <li onclick="showPage('orders')">
-            📦 <span>Quản lý đơn hàng</span> 
+            📦 <span>Quản lý đơn hàng</span>
+        </li>
+
+        <li onclick="showPage('settings')">
+            ⚙️ <span>Cài đặt</span>
         </li>
     </ul>
 </div>
@@ -101,6 +114,62 @@
 
     </div>
 
+    <div id="categories-page" class="page" style="display:none">
+        <div class="admin-card">
+            <div class="admin-top">
+                <h2>Quản lý danh mục</h2>
+
+                <div class="admin-add">
+                    <input type="text" id="categoryName" placeholder="Tên danh mục">
+                    <button onclick="addCategory()">Thêm</button>
+                </div>
+            </div>
+
+            <div id="category-list"></div>
+        </div>
+    </div>
+
+    <div id="sizes-page" class="page" style="display:none">
+        <div class="admin-card">
+            <div class="admin-top">
+                <h2>Quản lý size</h2>
+                <div class="admin-add">
+                    <input type="text" id="sizeName" placeholder="Ví dụ: 0-6M">
+                    <button onclick="addSize()">Thêm</button>
+                </div>
+            </div>
+
+            <div id="size-list"></div>
+        </div>
+    </div>
+
+    <div id="users-page" class="page" style="display:none">
+        <div class="admin-card">
+            <h2>Quản lý tài khoản</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tài khoản</th>
+                        <th>Email</th>
+                        <th>Vai trò</th>
+                        <th>Ngày tạo</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+
+                <tbody id="user-list"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="settings-page" class="page" style="display:none">
+        <div class="admin-card">
+            <h2>Cài đặt hệ thống</h2>
+            <p>Website bán quần áo trẻ em Bemohome</p>
+        </div>
+    </div>
+
     <div id="orders-page" class="page" style="display: none">
         <table class="table">
             <thead>
@@ -119,6 +188,18 @@
     </div>
 
 </div>
+
+<!-- ORDER MODAL -->
+ <div class="order-modal" id="orderModal">
+    <div class="order-modal-box">
+        <div class="order-modal-top">
+            <h2>Chi tiết đơn hàng</h2>
+            <button onclick="closeOrderModal()">X</button>
+        </div>
+
+        <div id="orderDetailContent"></div>
+    </div>
+ </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="admin.js"></script>
